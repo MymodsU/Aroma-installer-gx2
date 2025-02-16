@@ -1,0 +1,16 @@
+-- This is a simple example of an RPX script that you might find in an Aroma framework or Roblox game
+
+-- Let's create a part when a player joins the game
+
+game.Players.PlayerAdded:Connect(function(player)
+    -- Create a new part
+    local part = Instance.new("Part")
+    part.Size = Vector3.new(4, 1, 4)  -- Set the size of the part
+    part.Position = Vector3.new(0, 10, 0)  -- Position it above the ground
+    part.Anchored = true  -- Make sure it stays in place
+    part.BrickColor = BrickColor.new("Bright red")  -- Give it a red color
+    part.Parent = game.Workspace  -- Parent it to the workspace
+
+    -- Output a message to the player
+    game.ReplicatedStorage:WaitForChild("Message"):FireClient(player, "A new part has been created for you!")
+end)

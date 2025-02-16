@@ -1,0 +1,26 @@
+<aroma>
+    <info>
+        <name>Aroma Launcher Settings</name>
+        <version>1.0</version>
+        <author>ali derie</author>
+        <description>Manage the settings for Aroma Launcher</description>
+    </info>
+
+    <!-- Settings Menu for Aroma Launcher -->
+    <menu>
+        <title>Aroma Launcher Settings</title>
+        <description>Customize your Aroma Launcher</description>
+
+        <!-- Option 1: Add New App to Launcher -->
+        <option name="Add New App" action="launch" script="/path/to/add-app.sh"/>
+
+        <!-- Option 2: Manage App Paths -->
+        <option name="Manage App Paths" action="browse" path="/sdcard/AromaLauncher"/>
+
+        <!-- Option 3: Edit App Launch Settings -->
+        <option name="Edit Launch Settings" action="launch" script="/path/to/launch-settings.sh"/>
+
+        <!-- Option 4: Customize Theme -->
+        <option name="Change Theme" action="launch" script="/path/to/change-theme.sh"/>
+    </menu>
+</aroma>

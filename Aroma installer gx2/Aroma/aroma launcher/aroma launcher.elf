@@ -1,0 +1,85 @@
+#include <wiiu.h>
+#include <stdio.h>
+#include <dirent.h>
+#include <string.h>
+
+#define MAX_APPS 50
+#define APP_NAME_LEN 64
+
+typedef struct {
+    char name[APP_NAME_LEN];
+    char path[128];  // Full path to the app
+} App;
+
+#define SCREEN_WIDTH  640
+#define SCREEN_HEIGHT 480
+
+// Function to list apps from the SD card
+int listApps(App *apps, int *appCount) {
+    DIR *dir = opendir("/vol/storage_sdcard/wiiu/apps/");
+    if (dir == NULL) {
+        return -1;  // Error opening SD card
+    }
+
+    struct dirent *entry;
+    *appCount = 0;
+
+    // Read the directories (apps)
+    while ((entry = readdir(dir)) != NULL) {
+        if (entry->d_type == DT_DIR) {
+            // Each directory is a potential app, check for the .elf file
+            char appPath[128];
+            snprintf(appPath, sizeof(appPath), "/vol/storage_sdcard/wiiu/apps/%s/%s.elf", entry->d_name, entry->d_name);
+
+            // Check if the ELF file exists
+            FILE *file = fopen(appPath, "r");
+            if (file) {
+                // App found, store it in the array
+                strncpy(apps[*appCount].name, entry->d_name, APP_NAME_LEN);
+                strncpy(apps[*appCount].path, appPath, sizeof(apps[*appCount].path));
+                (*appCount)++;
+                fclose(file);
+            }
+        }
+
+        // Stop if we have reached the max number of apps
+        if (*appCount >= MAX_APPS) break;
+    }
+
+    closedir(dir);
+    return 0;
+}
+
+// Function to launch the selected app
+int launchApp(const char *appPath) {
+    // You can use execApp() or other methods to load the ELF
+    if (execApp(appPath) != 0) {
+        printf("Error launching app\n");
+        return -1;
+    }
+    return 0;
+}
+
+// Draw a blue background with white text
+void drawBackground() {
+    // Fill the screen with a blue color
+    fillScreen(COLOR(0, 0, 255)); // Blue background
+}
+
+// Draw the app list with red selection highlight
+void drawAppList(App *apps, int appCount, int selectedIndex) {
+    // Set font and color for general text
+    setFont(FONT_SYSTEM);
+    setTextColor(COLOR(255, 255, 255)); // White text
+    
+    // Draw title in white
+    drawText(SCREEN_WIDTH / 2 - 100, 20, "Select an App:");
+
+    // Draw app list with highlighting for
+
+   //CSS copy and paste
+  Welcome to Aroma Launcher
+---------------------------
+[ App 1 ]  [ App 2 ]
+[ App 3 ]  [ App 4 ]
+

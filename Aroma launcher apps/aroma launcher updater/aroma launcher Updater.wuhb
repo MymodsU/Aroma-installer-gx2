@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <string.h>
+#include <curl/curl.h>
+
+// Function to fetch the latest version from a URL
+size_t write_callback(void *ptr, size_t size, size_t nmemb, char *data) {
+    strcat(data, (char *)ptr);  // Append the fetched content
+    return size * nmemb;
+}
+
+int check_for_update() {
+    CURL *curl;
+    CURLcode res;
+    char url[] = "https://api.github.com/repos/yourrepo/aroma/releases/latest";
+    char latest_version[256] = {0}; // Store the version info
+
+    // Initialize curl
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if (curl) {
+        // Set the URL to fetch
+        curl_easy_setopt(curl, CURLOPT_URL, url);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, latest_version);
+
+        // Perform the request
+        res = curl_easy_perform(curl);
+
+        // Check if the request was successful
+        if (res != CURLE_OK) {
+            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+            return 0; // No update found
+        }
+
+        // Parse the version info from latest_version (JSON response)
+        printf("Latest version: %s\n", latest_version);  // Print for testing
+
+        curl_easy_cleanup(curl);
+    }
+
+    curl_global_cleanup();
+    return 1;  // Update available
+}

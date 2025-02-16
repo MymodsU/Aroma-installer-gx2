@@ -1,0 +1,21 @@
+<aroma>
+    <info>
+        <name>Aroma Launcher</name>
+        <version>1.0</version>
+        <author>Your Name</author>
+        <description>Aromas launcher is like the homebrew launcher and with is app any apps  like tiramisu apps or any you can play </description>
+    </info>
+
+    <menu>
+        <title>the Aroma Launcher for aroma</title>
+        <description>Choose an option below:</description>
+
+        <!-- Option 1: Launch the App -->
+        <option name="Launch App" action="launch" file="/path/to/your/app.apk"/>
+
+        <!-- Option 2: Open Folder -->
+        <option name="Open App Folder" action="browse" path="/path/to/your/folder"/>
+
+        <!-- You can add more options here based on what you'd like to do -->
+    </menu>
+</aroma>

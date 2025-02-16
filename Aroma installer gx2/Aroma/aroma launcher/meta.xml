@@ -1,0 +1,36 @@
+<aroma>
+    <info>
+        <name>Aroma Launcher</name>
+        <version>1.0</version>
+        <author>Your Name</author>
+        <description>Manage apps and files with Aroma</description>
+    </info>
+
+    <!-- Main Menu -->
+    <menu>
+        <title>Welcome to Aroma Launcher</title>
+        <description>Select an action:</description>
+
+        <!-- Option 1: Launch App -->
+        <option name="Launch My App" action="launch" file="/path/to/your/app.apk"/>
+
+        <!-- Option 2: Browse Folder -->
+        <option name="Browse My Files" action="browse" path="/path/to/your/folder"/>
+
+        <!-- Option 3: Install APK -->
+        <option name="Install APK" action="install" file="/path/to/your/other/app.apk"/>
+
+        <!-- Option 4: Custom Script -->
+        <option name="Run Custom Script" action="run" script="/path/to/your/script.sh"/>
+    </menu>
+</aroma>
+<menu>
+    <title>Select an Option</title>
+    <description>Choose an app or task</description>
+
+    <option name="Launch App 1" action="launch" file="/path/to/app1.apk"/>
+    <option name="Launch App 2" action="launch" file="/path/to/app2.apk"/>
+    <option name="Install APK" action="install" file="/path/to/new-app.apk"/>
+    <option name="Browse Files" action="browse" path="/path/to/files"/>
+    <option name="Run Custom Script" action="run" script="/path/to/custom-script.sh"/>
+</menu>

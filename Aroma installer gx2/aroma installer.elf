@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int copy_file(const char *source, const char *destination) {
+    FILE *src = fopen(source, "rb");
+    if (!src) {
+        printf("Error opening source file %s\n", source);
+        return 1;
+    }
+    
+    FILE *dest = fopen(destination, "wb");
+    if (!dest) {
+        printf("Error opening destination file %s\n", destination);
+        fclose(src);
+        return 1;
+    }
+
+    char buffer[1024];
+    size_t bytesRead;
+    while ((bytesRead = fread(buffer, 1, sizeof(buffer), src)) > 0) {
+        fwrite(buffer, 1, bytesRead, dest);
+    }
+
+    fclose(src);
+    fclose(dest);
+    return 0;
+}
+
+int main() {
+    // Define source and destination paths
+    const char *source = "/sdcard/aroma/aroma-launcher.elf";
+    const char *destination = "/apps/aroma/aroma-launcher.elf";
+
+    // Copy the Aroma Launcher file to the correct location
+    printf("Installing Aroma Launcher...\n");
+    if (copy_file(source, destination) != 0) return 1;
+
+    printf("Aroma Launcher installed successfully!\n");
+    return 0;
+}

@@ -1,0 +1,30 @@
+<aroma>
+    <info>
+        <name> Aroma Installer GX2</name>
+        <version>1.0</version>
+        <author>Ali Derie</author>
+        <description>Manage wii u aroma launcher or updater</description>
+    </info>just install aroma launcher or updater if you want to
+
+    <menu>
+        <title>Welcome Aroma launcher Installer</title>
+        <description>Manage your installed apps below:</description>
+
+        <option name="Install Aroma Launcher" action="install" script="/sdcard/AromaInstaller/install.sh"/>
+
+        <!-- Option 1: Install New Apps -->
+        <option name="Install New App" action="install" file="/sdcard/AromaInstaller/apps"/>
+
+        <!-- Option 2: Install App Updates -->
+        <option name="Install App Update" action="update" file="/sdcard/AromaInstaller/updates"/>
+
+        <!-- Option 3: Remove Apps -->
+        <option name="Remove App" action="remove" file="/sdcard/AromaInstaller/remove"/>
+
+        <!-- Option 4: Run Post-Installation Script -->
+        <option name="Run Post-Installation Script" action="run" script="/sdcard/AromaInstaller/install.sh"/>
+
+        <!-- Option 5: Manage Settings -->
+        <option name="Manage Settings" action="launch" script="/sdcard/AromaInstaller/settings.sh"/>
+    </menu>
+</aroma>

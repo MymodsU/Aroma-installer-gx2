@@ -1,0 +1,13 @@
+#!/bin/bash
+# Reading custom configuration from a wuhb file
+config_file="/path/to/your/settings.wuhb"
+
+if [ -f "$config_file" ]; then
+    # Process the wuhb file (this depends on the file format you define)
+    while IFS= read -r line; do
+        echo "Processing line: $line"
+        # Add custom processing logic for wuhb file content here
+    done < "$config_file"
+else
+    echo "wuhb file not found"
+fi
